@@ -44,6 +44,10 @@ public class Rent {
 
     //TODO: Kullanıcı, Sözleşme kuralları
 
-    @ManyToMany(mappedBy = "rents", fetch = FetchType.EAGER)
+    @ManyToMany( fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "rent_car",
+            joinColumns = @JoinColumn(name = "rent_id"),
+            inverseJoinColumns = @JoinColumn(name = "car_id"))
     private List<Car> cars;
 }
