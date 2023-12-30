@@ -1,26 +1,60 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="index.html">Rent A Car</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="model.html">Model</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Marka</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="car.html">Araba</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<!DOCTYPE html>
+<html>
 
-<div class="container" id="content">
-    <!-- İçerik buraya gelecek -->
-</div>
-<!-- JavaScript dosyasını çağırın -->
-<script src="./brand.js"></script>
+<head>
+    <title>Rent A Car Apps</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Rent A Car</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="model.html">Model</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Marka</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="car.html">Araba</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" id="content">
+        <!-- İçerik buraya gelecek -->
+
+        <form id="brandForm" class="mb-4">
+            <div class="form-group">
+                <label for="name">Brand Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <button type="button" class="btn btn-primary" id="addBrandBtn">Add Brand</button>
+        </form>
+        <table id="brandTable" class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Buraya dinamik olarak eklenen tablo içeriği gelecek -->
+            </tbody>
+        </table>
+    </div>
+    <!-- JavaScript dosyasını çağırın -->
+    <script src="./brand.js"></script>
+</body>
+
+</html>
