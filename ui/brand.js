@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var name = document.getElementById('name').value;
 
         // Fetch API ile veriyi backend'e gönder
-        fetch('http://localhost:8080/brand', {
+        fetch('http://localhost:8080/api/brand', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

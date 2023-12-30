@@ -33,7 +33,7 @@ public class BrandController {
         return brandService.getBrandByID(id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Brand saveCategory(@RequestBody Brand brand) {
         return brandService.saveBrand(brand);
     }
@@ -42,7 +42,7 @@ public class BrandController {
     public Brand updateBrand(@RequestBody Brand brand) throws Exception {
         return brandService.updateBrand(brand);
     }
-    
+
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String deleteBrand(@PathVariable("id") Integer id) throws Exception {
         brandService.deleteBrand(id);
