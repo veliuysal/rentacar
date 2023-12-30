@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function updateTable() {
-    fetch('http://localhost:8080/brand/all', {
+    fetch('http://localhost:8080/api/brand/all', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
