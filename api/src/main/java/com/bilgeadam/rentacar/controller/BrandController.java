@@ -33,7 +33,7 @@ public class BrandController {
         return brandService.getBrandByID(id);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Brand saveCategory(@RequestBody Brand brand) {
         return brandService.saveBrand(brand);
     }
