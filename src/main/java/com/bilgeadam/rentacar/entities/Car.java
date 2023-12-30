@@ -46,6 +46,7 @@ public class Car {
     @JsonBackReference
     private Model model;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Rent> rents;
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<RentCar> rentCars;
 }
