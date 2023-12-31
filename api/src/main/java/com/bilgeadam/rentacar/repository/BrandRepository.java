@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, Integer> {
 
-    @Query(value = "SELECT NVL(MAX(b.id,0),0) FROM Brand b")
+    @Query(value = "SELECT COALESCE(MAX(b.id), 0) FROM Brand b")
     Integer getMaxId();
 }
