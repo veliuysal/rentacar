@@ -1,5 +1,6 @@
 package com.bilgeadam.rentacar.controller;
 
+import com.bilgeadam.rentacar.dto.BrandSaveDTO;
 import com.bilgeadam.rentacar.entities.Brand;
 import com.bilgeadam.rentacar.services.BrandService;
 import org.springframework.http.MediaType;
@@ -33,9 +34,9 @@ public class BrandController {
         return brandService.getBrandByID(id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Brand saveCategory(@RequestBody Brand brand) {
-        return brandService.saveBrand(brand);
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public Brand saveCategory(@RequestBody BrandSaveDTO dto) {
+        return brandService.saveBrand(dto);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

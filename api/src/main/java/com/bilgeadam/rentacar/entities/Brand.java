@@ -28,6 +28,5 @@ public class Brand {
     private byte[] logo;
 
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<Model> models;
 }

@@ -90,7 +90,7 @@ function editBrand() {
     fetch('http://localhost:8080/api/brand', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json;charset=UTF-8'
         },
         body: JSON.stringify({ id: id, name: newName }),
     })
