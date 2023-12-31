@@ -33,6 +33,25 @@
 
     <div class="container" id="content">
         <!-- İçerik buraya gelecek -->
+        <form id="modelForm" class="mb-4">
+            <div class="form-group">
+                <label for="name">Brand Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <button type="button" class="btn btn-primary" id="addModelBtn">Add Brand</button>
+        </form>
+        <table id="modelTable" class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Brand</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Buraya dinamik olarak eklenen tablo içeriği gelecek -->
+            </tbody>
+        </table>
     </div>
     <!-- JavaScript dosyasını çağırın -->
     <script src="./model.js"></script>
