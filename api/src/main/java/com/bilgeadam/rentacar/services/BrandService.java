@@ -1,6 +1,7 @@
 package com.bilgeadam.rentacar.services;
 
 import com.bilgeadam.rentacar.dto.BrandSaveDTO;
+import com.bilgeadam.rentacar.dto.BrandUpdateDTO;
 import com.bilgeadam.rentacar.entities.Brand;
 import com.bilgeadam.rentacar.repository.BrandRepository;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,11 @@ public class BrandService {
         return brandRepository.save(brand);
     }
 
-    public Brand updateBrand(Brand brand) {
+    public Brand updateBrand(BrandUpdateDTO dto) {
+        Optional<Brand> optBrand = brandRepository.findById(dto.getId());
+        if (optBrand.isEmpty()) return null;
+        Brand brand = optBrand.get();
+        brand.setName(dto.getName());
         return brandRepository.save(brand);
     }
 

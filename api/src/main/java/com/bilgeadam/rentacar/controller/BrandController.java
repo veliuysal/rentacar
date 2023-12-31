@@ -1,6 +1,7 @@
 package com.bilgeadam.rentacar.controller;
 
 import com.bilgeadam.rentacar.dto.BrandSaveDTO;
+import com.bilgeadam.rentacar.dto.BrandUpdateDTO;
 import com.bilgeadam.rentacar.entities.Brand;
 import com.bilgeadam.rentacar.services.BrandService;
 import org.springframework.http.MediaType;
@@ -39,9 +40,9 @@ public class BrandController {
         return brandService.saveBrand(dto);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Brand updateBrand(@RequestBody Brand brand) throws Exception {
-        return brandService.updateBrand(brand);
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Brand updateBrand(@RequestBody BrandUpdateDTO dto) throws Exception {
+        return brandService.updateBrand(dto);
     }
 
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
