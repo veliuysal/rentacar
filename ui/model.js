@@ -88,6 +88,7 @@ function openEditModal(id) {
 function editModel() {
     var id = document.getElementById('editModelId').value;
     var newName = document.getElementById('editModelName').value;
+    var newBrandId = document.getElementById('editBrands').value;
 
     // Fetch API ile veriyi backend'e gönder
     fetch('http://localhost:8080/api/model', {
@@ -95,7 +96,7 @@ function editModel() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id: id, name: newName }),
+        body: JSON.stringify({ id: id, name: newName, brandId: newBrandId }),
     })
         .then(response => response.json())
         .then(() => {
