@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function updateTable(brandID) {
-    var url = brandID ? 'http://localhost:8080/api/model/brand/'+brandID :'http://localhost:8080/api/model/all' ;
+    var url = brandID ? 'http://localhost:8080/api/model/brand/' + brandID : 'http://localhost:8080/api/model/all';
     fetch(url, {
         method: 'GET',
         headers: {
@@ -43,13 +43,13 @@ function updateTable(brandID) {
             var tableBody = document.getElementById('modelTable').getElementsByTagName('tbody')[0];
             tableBody.innerHTML = '';
 
-            data.forEach(function (Model) {
+            data.forEach(function (model) {
                 var row = "<tr>" +
-                    "<td>" + Model.id + "</td>" +
-                    "<td>" + Model.name + "</td>" +
-                    "<td>" +
-                    "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#editModal' onclick='openEditModal(" + Model.id + ")'>Edit</button> | " +
-                    "<button type='button' class='btn btn-danger' onclick='deleteModel(" + Model.id + ")'>Delete</button>" +
+                    "<td>" + model.id + "</td>" +
+                    "<td>" + model.name + "</td>" +
+                    "<td>" + model.brand.name +
+                    "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#editModal' onclick='openEditModal(" + model.id + ")'>Edit</button> | " +
+                    "<button type='button' class='btn btn-danger' onclick='deleteModel(" + model.id + ")'>Delete</button>" +
                     "</td>" +
                     "</tr>";
 
@@ -134,7 +134,7 @@ function deleteModel(id) {
     }
 }
 
-function fillBrands(){
+function fillBrands() {
     fetch('http://localhost:8080/api/brand/all', {
         method: 'GET',
         headers: {
@@ -147,7 +147,7 @@ function fillBrands(){
             brands.innerHTML = "<option>Tümü</option>";
 
             data.forEach(function (brand) {
-                var row = " <option value="+brand.id+">"+ brand.name+"</option>";
+                var row = " <option value=" + brand.id + ">" + brand.name + "</option>";
 
                 brands.innerHTML += row;
             });
@@ -158,9 +158,8 @@ function fillBrands(){
         });
 }
 
-function getSelectedOption(){
+function getSelectedOption() {
     var selectedBrand = document.getElementById('brands').value;
     updateTable(selectedBrand);
 }
 
-    

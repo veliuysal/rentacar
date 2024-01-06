@@ -1,12 +1,11 @@
 package com.bilgeadam.rentacar.services;
 
-import com.bilgeadam.rentacar.dto.BrandSaveDTO;
-import com.bilgeadam.rentacar.dto.BrandUpdateDTO;
+import com.bilgeadam.rentacar.dto.brand.BrandSaveDTO;
+import com.bilgeadam.rentacar.dto.brand.BrandUpdateDTO;
 import com.bilgeadam.rentacar.entities.Brand;
 import com.bilgeadam.rentacar.repository.BrandRepository;
 import org.springframework.stereotype.Service;
 
-import java.net.Inet4Address;
 import java.util.List;
 import java.util.Optional;
 

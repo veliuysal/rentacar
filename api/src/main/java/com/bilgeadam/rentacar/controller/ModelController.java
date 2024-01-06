@@ -1,10 +1,8 @@
 package com.bilgeadam.rentacar.controller;
 
-import com.bilgeadam.rentacar.dto.BrandSaveDTO;
-import com.bilgeadam.rentacar.dto.BrandUpdateDTO;
-import com.bilgeadam.rentacar.dto.ModelSaveDTO;
-import com.bilgeadam.rentacar.dto.ModelUpdateDTO;
-import com.bilgeadam.rentacar.entities.Brand;
+import com.bilgeadam.rentacar.dto.model.ModelDTO;
+import com.bilgeadam.rentacar.dto.model.ModelSaveDTO;
+import com.bilgeadam.rentacar.dto.model.ModelUpdateDTO;
 import com.bilgeadam.rentacar.entities.Model;
 import com.bilgeadam.rentacar.services.ModelService;
 import org.springframework.http.MediaType;
@@ -28,7 +26,7 @@ public class ModelController {
     }
 
     @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Model> getAllModels() {
+    public List<ModelDTO> getAllModels() {
         return modelService.getAllModels();
     }
 
@@ -38,7 +36,7 @@ public class ModelController {
     }
 
     @GetMapping(path = "/brand/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Model> getAllModelsByBrandID(@PathVariable("id") Integer brandId) {
+    public List<ModelDTO> getAllModelsByBrandID(@PathVariable("id") Integer brandId) {
         return modelService.getAllModelsByBrandID(brandId);
     }
 

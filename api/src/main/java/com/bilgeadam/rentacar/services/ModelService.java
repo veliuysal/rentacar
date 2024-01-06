@@ -1,7 +1,9 @@
 package com.bilgeadam.rentacar.services;
 
-import com.bilgeadam.rentacar.dto.ModelSaveDTO;
-import com.bilgeadam.rentacar.dto.ModelUpdateDTO;
+import com.bilgeadam.rentacar.dto.brand.BrandDTO;
+import com.bilgeadam.rentacar.dto.model.ModelDTO;
+import com.bilgeadam.rentacar.dto.model.ModelSaveDTO;
+import com.bilgeadam.rentacar.dto.model.ModelUpdateDTO;
 import com.bilgeadam.rentacar.entities.Brand;
 import com.bilgeadam.rentacar.entities.Model;
 import com.bilgeadam.rentacar.repository.BrandRepository;
@@ -23,8 +25,10 @@ public class ModelService {
         this.brandRepository = brandRepository;
     }
 
-    public List<Model> getAllModels() {
-        return modelRepository.findAll();
+    public List<ModelDTO> getAllModels() {
+        List<Model> models = modelRepository.findAll();
+        List<ModelDTO> dtos = models.stream().map(this::getModelDTO).toList();
+        return dtos;
     }
 
     public Model getModelByID(Integer id) {
@@ -32,8 +36,21 @@ public class ModelService {
         return optModel.isEmpty() ? null : optModel.get();
     }
 
-    public List<Model> getAllModelsByBrandID(Integer brandId) {
-        return modelRepository.findAllByBrand_id(brandId);
+    public List<ModelDTO> getAllModelsByBrandID(Integer brandId) {
+        List<Model> models = modelRepository.findAllByBrand_id(brandId);
+        List<ModelDTO> dtos = models.stream().map(this::getModelDTO).toList();
+        return dtos;
+    }
+
+    public ModelDTO getModelDTO(Model model) {
+        ModelDTO dto = new ModelDTO();
+        dto.setId(model.getId());
+        dto.setName(model.getName());
+        BrandDTO brandDTO = new BrandDTO();
+        brandDTO.setId(model.getBrand().getId());
+        brandDTO.setName(model.getBrand().getName());
+        dto.setBrand(brandDTO);
+        return dto;
     }
 
     public Model saveModel(ModelSaveDTO dto) throws Exception {

@@ -1,4 +1,4 @@
-package com.bilgeadam.rentacar.dto;
+package com.bilgeadam.rentacar.dto.brand;
 
 import lombok.Data;
 

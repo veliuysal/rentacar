@@ -1,7 +1,7 @@
 package com.bilgeadam.rentacar.controller;
 
-import com.bilgeadam.rentacar.dto.BrandSaveDTO;
-import com.bilgeadam.rentacar.dto.BrandUpdateDTO;
+import com.bilgeadam.rentacar.dto.brand.BrandSaveDTO;
+import com.bilgeadam.rentacar.dto.brand.BrandUpdateDTO;
 import com.bilgeadam.rentacar.entities.Brand;
 import com.bilgeadam.rentacar.services.BrandService;
 import org.springframework.http.MediaType;
