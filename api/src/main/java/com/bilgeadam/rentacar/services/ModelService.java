@@ -31,9 +31,9 @@ public class ModelService {
         return dtos;
     }
 
-    public Model getModelByID(Integer id) {
+    public ModelDTO getModelByID(Integer id) {
         Optional<Model> optModel = modelRepository.findById(id);
-        return optModel.isEmpty() ? null : optModel.get();
+        return optModel.isEmpty() ? null : getModelDTO(optModel.get());
     }
 
     public List<ModelDTO> getAllModelsByBrandID(Integer brandId) {

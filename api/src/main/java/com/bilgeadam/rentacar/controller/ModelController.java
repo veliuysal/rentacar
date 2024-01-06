@@ -31,7 +31,7 @@ public class ModelController {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Model getModelByID(@PathVariable("id") Integer id) {
+    public ModelDTO getModelByID(@PathVariable("id") Integer id) {
         return modelService.getModelByID(id);
     }
 

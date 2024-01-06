@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Sayfa yüklendiğinde tüm markaları getir
-    fillBrands();
+    fillBrands('brands');
 
     // Form submit olayı
     document.getElementById('addModelBtn').addEventListener('click', function () {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('name').value = '';
 
                 // Tabloyu güncelle
-                updateTable();
+                updateTable(-1);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function updateTable(brandID) {
-    var url = brandID ? 'http://localhost:8080/api/model/brand/' + brandID : 'http://localhost:8080/api/model/all';
+    var url = brandID != -1 ? 'http://localhost:8080/api/model/brand/' + brandID : 'http://localhost:8080/api/model/all';
     fetch(url, {
         method: 'GET',
         headers: {
@@ -70,11 +70,12 @@ function openEditModal(id) {
         }
     })
         .then(response => response.json())
-        .then(Model => {
+        .then(model => {
             // Modal içindeki formu doldur
-            document.getElementById('editModelId').value = Model.id;
-            document.getElementById('editModelName').value = Model.name;
+            document.getElementById('editModelId').value = model.id;
+            document.getElementById('editModelName').value = model.name;
 
+            fillBrands('editBrands', model.brand.id)
             // Modal'ı aç
             $('#editModal').modal('show');
         })
@@ -102,7 +103,7 @@ function editModel() {
             $('#editModal').modal('hide');
 
             // Tabloyu güncelle
-            updateTable();
+            updateTable(-1);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -122,7 +123,7 @@ function deleteModel(id) {
             .then(response => {
                 if (response.ok) {
                     // Başarılı ise tabloyu güncelle
-                    updateTable();
+                    updateTable(-1);
                 } else {
                     // Başarısız ise hata mesajını logla
                     console.error('Error:', response.status);
@@ -134,7 +135,7 @@ function deleteModel(id) {
     }
 }
 
-function fillBrands() {
+function fillBrands(selectBrands, selected) {
     fetch('http://localhost:8080/api/brand/all', {
         method: 'GET',
         headers: {
@@ -143,15 +144,15 @@ function fillBrands() {
     })
         .then(response => response.json())
         .then(data => {
-            var brands = document.getElementById('brands');
-            brands.innerHTML = "<option>Tümü</option>";
+            var brands = document.getElementById(selectBrands);
+            brands.innerHTML = "<option value='-1'>Tümü</option>";
 
             data.forEach(function (brand) {
-                var row = " <option value=" + brand.id + ">" + brand.name + "</option>";
+                var row = " <option value=" + brand.id + (selected == brand.id ? " selected " : "") + ">" + brand.name + "</option>";
 
                 brands.innerHTML += row;
             });
-            updateTable();
+            updateTable(-1);
         })
         .catch((error) => {
             console.error('Error:', error);
