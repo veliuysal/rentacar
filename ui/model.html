@@ -35,10 +35,14 @@
         <!-- İçerik buraya gelecek -->
         <form id="modelForm" class="mb-4">
             <div class="form-group">
-                <label for="name">Brand Name:</label>
+                <label for="brands">Choose a brand:</label>
+                <select name="brands" id="brands" class="form-control">
+                </select>
+
+                <label for="name">Model Name:</label>
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
-            <button type="button" class="btn btn-primary" id="addModelBtn">Add Brand</button>
+            <button type="button" class="btn btn-primary" id="addModelBtn">Add Model</button>
         </form>
         <table id="modelTable" class="table">
             <thead>

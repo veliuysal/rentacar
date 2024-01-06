@@ -28,27 +28,32 @@ public class ModelController {
     }
 
     @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Model> getAllBrands() {
+    public List<Model> getAllModels() {
         return modelService.getAllModels();
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Model getBrandByID(@PathVariable("id") Integer id) {
+    public Model getModelByID(@PathVariable("id") Integer id) {
         return modelService.getModelByID(id);
     }
 
+    @GetMapping(path = "/brand/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Model> getAllModelsByBrandID(@PathVariable("id") Integer brandId) {
+        return modelService.getAllModelsByBrandID(brandId);
+    }
+
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public Model saveCategory(@RequestBody ModelSaveDTO dto) throws Exception {
+    public Model saveModel(@RequestBody ModelSaveDTO dto) throws Exception {
         return modelService.saveModel(dto);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Model updateBrand(@RequestBody ModelUpdateDTO dto) throws Exception {
+    public Model updateModel(@RequestBody ModelUpdateDTO dto) throws Exception {
         return modelService.updateModel(dto);
     }
 
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String deleteBrand(@PathVariable("id") Integer id) throws Exception {
+    public String deleteModel(@PathVariable("id") Integer id) throws Exception {
         modelService.deleteModel(id);
         return "Silme İşlemi Başarılı.";
     }

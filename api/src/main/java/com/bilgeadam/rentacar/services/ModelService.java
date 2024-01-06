@@ -32,6 +32,10 @@ public class ModelService {
         return optModel.isEmpty() ? null : optModel.get();
     }
 
+    public List<Model> getAllModelsByBrandID(Integer brandId) {
+        return modelRepository.findAllByBrand_id(brandId);
+    }
+
     public Model saveModel(ModelSaveDTO dto) throws Exception {
         if (Objects.isNull(dto.getBrandId()))
             throw new Exception("Brand alanı boş olamaz");

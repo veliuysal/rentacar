@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Sayfa yüklendiğinde tüm markaları getir
-    updateTable();
+    fillBrands();
 
     // Form submit olayı
     document.getElementById('addModelBtn').addEventListener('click', function () {
@@ -29,8 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function updateTable() {
-    fetch('http://localhost:8080/api/Model/all', {
+function updateTable(brandID) {
+    var url = brandID ? 'http://localhost:8080/api/model/brand/'+brandID :'http://localhost:8080/api/model/all' ;
+    fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -38,7 +39,7 @@ function updateTable() {
     })
         .then(response => response.json())
         .then(data => {
-            var tableBody = document.getElementById('ModelTable').getElementsByTagName('tbody')[0];
+            var tableBody = document.getElementById('modelTable').getElementsByTagName('tbody')[0];
             tableBody.innerHTML = '';
 
             data.forEach(function (Model) {
@@ -61,7 +62,7 @@ function updateTable() {
 
 function openEditModal(id) {
     // Modal'ı açmadan önce mevcut marka bilgilerini al
-    fetch('http://localhost:8080/api/Model/' + id, {
+    fetch('http://localhost:8080/api/model/' + id, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ function editModel() {
     var newName = document.getElementById('editModelName').value;
 
     // Fetch API ile veriyi backend'e gönder
-    fetch('http://localhost:8080/api/Model', {
+    fetch('http://localhost:8080/api/model', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -111,7 +112,7 @@ function editModel() {
 function deleteModel(id) {
     if (confirm('Are you sure you want to delete this Model?')) {
         // Fetch API ile veriyi backend'e gönder
-        fetch('http://localhost:8080/api/Model/' + id, {
+        fetch('http://localhost:8080/api/model/' + id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -130,6 +131,30 @@ function deleteModel(id) {
                 console.error('Error:', error);
             });
     }
+}
+
+function fillBrands(){
+    fetch('http://localhost:8080/api/brand/all', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            var brands = document.getElementById('brands');
+            brands.innerHTML = "<option>Tümü</option>";
+
+            data.forEach(function (brand) {
+                var row = " <option value="+brand.id+">"+ brand.name+"</option>";
+
+                brands.innerHTML += row;
+            });
+            updateTable();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
     
