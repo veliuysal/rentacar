@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('addModelBtn').addEventListener('click', function () {
         // Form verilerini al
         var name = document.getElementById('name').value;
+        var brand = document.getElementById('brands').value;
 
         // Fetch API ile veriyi backend'e gönder
         fetch('http://localhost:8080/api/model', {
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name: name }),
+            body: JSON.stringify({ name: name, brandId: brand }),
         })
             .then(response => response.json())
             .then(() => {
@@ -155,6 +156,11 @@ function fillBrands(){
         .catch((error) => {
             console.error('Error:', error);
         });
+}
+
+function getSelectedOption(){
+    var selectedBrand = document.getElementById('brands').value;
+    updateTable(selectedBrand);
 }
 
     
