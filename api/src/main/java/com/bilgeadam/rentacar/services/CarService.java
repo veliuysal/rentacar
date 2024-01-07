@@ -1,22 +1,29 @@
 package com.bilgeadam.rentacar.services;
 
-import com.bilgeadam.rentacar.dto.CarDTO;
+import com.bilgeadam.rentacar.dto.car.CarDTO;
+import com.bilgeadam.rentacar.dto.car.CarSaveDTO;
 import com.bilgeadam.rentacar.dto.common.EnumDTO;
 import com.bilgeadam.rentacar.dto.model.ModelDTO;
 import com.bilgeadam.rentacar.entities.Car;
+import com.bilgeadam.rentacar.entities.Model;
 import com.bilgeadam.rentacar.repository.CarRepository;
+import com.bilgeadam.rentacar.repository.ModelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class CarService {
 
     private final CarRepository carRepository;
+    private final ModelRepository modelRepository;
     private final ModelService modelService;
 
-    public CarService(CarRepository carRepository, ModelService modelService) {
+    public CarService(CarRepository carRepository, ModelRepository modelRepository, ModelService modelService) {
         this.carRepository = carRepository;
+        this.modelRepository = modelRepository;
         this.modelService = modelService;
     }
 
@@ -24,6 +31,36 @@ public class CarService {
         List<Car> cars = carRepository.findAll();
         List<CarDTO> dtos = cars.stream().map(this::getCarDTO).toList();
         return dtos;
+    }
+
+    public CarDTO getCarById(Integer id) {
+        Optional<Car> optCar = carRepository.findById(id);
+        return optCar.isEmpty() ? null : getCarDTO(optCar.get());
+    }
+
+    public CarDTO saveCar(CarSaveDTO dto) throws Exception {
+        if (Objects.isNull(dto.getModelId()))
+            throw new Exception("Model alanı boş olamaz");
+        Optional<Model> optModel = modelRepository.findById(dto.getModelId());
+        if (optModel.isEmpty())
+            throw new Exception("Model Bulunuamadı");
+        if (Objects.isNull(dto.getColor()))
+            throw new Exception("Color alanı boş olamaz");
+        if (Objects.isNull(dto.getBodyType()))
+            throw new Exception("Body Type alanı boş olamaz");
+        if (Objects.isNull(dto.getFuelType()))
+            throw new Exception("Fuel Type alanı boş olamaz");
+        if (Objects.isNull(dto.getYear()))
+            throw new Exception("Year alanı boş olamaz");
+        Car car = new Car();
+        car.setYear(dto.getYear());
+        car.setModel(optModel.get());
+
+        return getCarDTO(carRepository.save(car));
+    }
+
+    public void deleteCar(Integer id) {
+        carRepository.deleteById(id);
     }
 
     public CarDTO getCarDTO(Car car) {

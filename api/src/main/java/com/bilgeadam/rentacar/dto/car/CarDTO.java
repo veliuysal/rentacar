@@ -1,4 +1,4 @@
-package com.bilgeadam.rentacar.dto;
+package com.bilgeadam.rentacar.dto.car;
 
 import com.bilgeadam.rentacar.dto.common.EnumDTO;
 import com.bilgeadam.rentacar.dto.common.SelectDataDTO;
