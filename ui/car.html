@@ -33,9 +33,91 @@
 
     <div class="container" id="content">
         <!-- İçerik buraya gelecek -->
+        <form id="carForm" class="mb-4">
+            <div class="form-group">
+                <label for="models">Choose a model:</label>
+                <select name="models" id="models" class="form-control" onchange="getSelectedModel()">
+                </select>
+                <label for="years">Year:</label>
+                <select name="years" id="years" class="form-control" onchange="getSelectedYear()">
+                </select>
+                <label for="bodyTpes">Body Type:</label>
+                <select name="bodyTpes" id="bodyTpes" class="form-control" onchange="getSelectedBodyTypes()">
+                </select>
+                <label for="colors">Color:</label>
+                <select name="colors" id="colors" class="form-control" onchange="getSelectedColor()">
+                </select>
+                <label for="fuelTypes">Fuel Type:</label>
+                <select name="fuelTypes" id="fuelTypes" class="form-control" onchange="getSelectedFuelTypes()">
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" id="addCarBtn">Add Car</button>
+        </form>
+        <table id="carTable" class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Body Type</th>
+                    <th>Color</th>
+                    <th>Fuel Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Buraya dinamik olarak eklenen tablo içeriği gelecek -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Düzenleme Modalı -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Car</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Düzenleme Formu -->
+                    <form id="editForm">
+                        <!-- Bu input ile düzenlenen marka ID'sini saklayın -->
+                        <input type="hidden" id="editCarId" name="editCarId">
+
+                        <div class="form-group">
+                            <label for="editModels">Model</label>
+                            <select name="editModels" id="editModels" class="form-control">
+                            </select>
+                            <label for="editYears">Year:</label>
+                            <select name="editYears" id="editYears" class="form-control">
+                            </select>
+                            <label for="editBodyTypes">Body Type:</label>
+                            <select name="editBodyTypes" id="editBodyTypes" class="form-control">
+                            </select>
+                            <label for="editColors">Color:</label>
+                            <select name="editColors" id="editColors" class="form-control">
+                            </select>  
+                            <label for="editFuelTypes">Fuel Type:</label>
+                            <select name="editFuelTypes" id="editFuelTypes" class="form-control">
+                            </select>                   
+                        </div>
+
+                        <!-- Diğer input alanları eklenebilir -->
+
+                        <button type="button" class="btn btn-primary" onclick="editBrand()">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- JavaScript dosyasını çağırın -->
     <script src="./car.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
