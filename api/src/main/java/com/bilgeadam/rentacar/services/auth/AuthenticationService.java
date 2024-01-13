@@ -26,7 +26,7 @@ public class AuthenticationService {
     public LoginDTO signup(SignUpRequest request) {
         var user = Personal.builder().firstName(request.getFirstName()).surname(request.getLastName())
                 .email(request.getEmail()).password(passwordEncoder.encode(request.getPassword()))
-                .roles(Role.SELLER.name()).build();
+                .roles(Role.ROLE_USER.name()).build();
         personalRepository.save(user);
         var jwt = jwtService.generateToken(user);
         return LoginDTO.builder().token(jwt).build();

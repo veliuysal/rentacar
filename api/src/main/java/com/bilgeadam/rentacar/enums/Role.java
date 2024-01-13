@@ -1,6 +1,6 @@
 package com.bilgeadam.rentacar.enums;
 
 public enum Role {
-    SELLER,
-    ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 }
