@@ -26,7 +26,12 @@ public class JwtService {
 
     private final PersonalRepository personalRepository;
 
+
     public static final String SECRET = "404D635166546A576E5A7234753778214125442A472D4B6150645267556B5870";
+
+    public String generateToken(UserDetails userDetails) {
+        return generateToken(new HashMap<>(), userDetails);
+    }
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -54,21 +59,12 @@ public class JwtService {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public LoginDTO generateToken(Authentication authentication) {
-
-        LoginDTO loginDto = new LoginDTO();
-        Optional<Personal> customerOptional = personalRepository.findByFirstName(authentication.getName());
-
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("authorities", authentication.getAuthorities());
-        claims.put("name", authentication.getName());
-        if(customerOptional.isPresent()) {
-            loginDto.setCustomerId(customerOptional.get().getId());
-        }
-        loginDto.setToken(createToken(claims, authentication.getName()));
-        return loginDto;
+    private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
+                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
-
     private String createToken(Map<String, Object> claims, String userName) {
         return Jwts.builder()
                 .setClaims(claims)
@@ -83,4 +79,5 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
 }
