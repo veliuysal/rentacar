@@ -30,10 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function updateTable() {
+    var token = localStorage.getItem('jwtToken');
     fetch('http://localhost:8080/api/brand/all', {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         }
     })
         .then(response => response.json())
@@ -132,4 +134,3 @@ function deleteBrand(id) {
     }
 }
 
-    

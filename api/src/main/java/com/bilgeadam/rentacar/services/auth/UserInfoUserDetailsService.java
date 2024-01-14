@@ -3,6 +3,7 @@ package com.bilgeadam.rentacar.services.auth;
 import com.bilgeadam.rentacar.config.UserInfoUserDetails;
 import com.bilgeadam.rentacar.entities.Personal;
 import com.bilgeadam.rentacar.repository.PersonalRepository;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
