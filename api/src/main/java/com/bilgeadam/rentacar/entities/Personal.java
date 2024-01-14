@@ -2,9 +2,7 @@ package com.bilgeadam.rentacar.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,11 +15,13 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Personal implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "personal_id_generator")
-    @SequenceGenerator(name = "personal_id_generator", schema ="rent" ,sequenceName = "personal_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "personal_id_generator", schema = "rent", sequenceName = "personal_id_seq", allocationSize = 1)
     private Long id;
 
     private String email;

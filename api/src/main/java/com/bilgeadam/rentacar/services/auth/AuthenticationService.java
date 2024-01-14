@@ -45,11 +45,11 @@ public class AuthenticationService {
     }
 
     public LoginDTO signin(SigninRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         var user = personalRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getEmail(), request.getPassword()));
         var jwt = jwtService.generateToken(user);
-        return LoginDTO.builder().token(jwt).build();
+        return LoginDTO.builder().role(user.getRoles()).token(jwt).build();
     }
 }

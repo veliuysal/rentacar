@@ -4,10 +4,10 @@ function submitForm() {
     console.log("username: " + username);
     console.log("password: " + password);
 
-    fetch('http://localhost:8080/customer/getToken', {
+    fetch('http://localhost:8080/api/auth/signin', {
         method: 'POST',
         body: JSON.stringify({
-            username,
+            'email': username,
             password
         }),
         headers: {
@@ -22,9 +22,8 @@ function submitForm() {
         })
         .then((data) => {
             console.log('login istek başarılı: ', data);
-            console.log('customerId : ' + data.customerId)
             localStorage.setItem('jwtToken', data.token);
-            const role = parseJwt(data.token);
+            const role = data.role;
             if ("ROLE_USER" === role) {
                 window.location.href = "index.html";
             } else if ("ROLE_ADMIN" === role) {
