@@ -15,10 +15,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "rent_car", schema = "rent")
 public class RentCar {
 
-
     @Id
     @GeneratedValue(generator = "rent_car_id_generator")
-    @SequenceGenerator(name = "rent_car_id_generator", sequenceName = "rent_car_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "rent_car_id_generator", schema = "rent", sequenceName = "rent_car_id_seq", allocationSize = 1)
     private Integer id;
 
     @ManyToOne

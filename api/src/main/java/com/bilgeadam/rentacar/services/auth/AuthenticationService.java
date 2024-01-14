@@ -9,7 +9,9 @@ import com.bilgeadam.rentacar.repository.PersonalRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthenticationService {
     private final PersonalRepository personalRepository;
     private final PasswordEncoder passwordEncoder;

@@ -12,14 +12,15 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "personal")
+@Table(name = "personal", schema = "rent")
 @Getter
 @Setter
 @Builder
 public class Personal implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "personal_id_generator")
+    @SequenceGenerator(name = "personal_id_generator", schema ="rent" ,sequenceName = "personal_id_seq", allocationSize = 1)
     private Long id;
 
     private String email;
@@ -29,6 +30,12 @@ public class Personal implements UserDetails {
 
     private String surname;
     private String password;
+    private String country;
+    private String city;
+    private String address;
+
+    @Column(name = "postal_code")
+    private String postalCode;
 
     private String roles;
 

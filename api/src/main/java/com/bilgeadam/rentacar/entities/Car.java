@@ -23,7 +23,7 @@ public class Car {
 
     @Id
     @GeneratedValue(generator = "car_id_generator")
-    @SequenceGenerator(name = "car_id_generator", sequenceName = "car_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "car_id_generator", schema ="rent", sequenceName = "car_id_seq", allocationSize = 1)
     private Integer id;
 
     @Column(name = "year")

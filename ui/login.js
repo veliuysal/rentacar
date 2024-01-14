@@ -24,7 +24,6 @@ function submitForm() {
             console.log('login istek başarılı: ', data);
             console.log('customerId : ' + data.customerId)
             localStorage.setItem('jwtToken', data.token);
-            localStorage.setItem('customerId', data.customerId);
             const role = parseJwt(data.token);
             if ("ROLE_USER" === role) {
                 window.location.href = "index.html";

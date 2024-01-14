@@ -20,7 +20,7 @@ public class Model {
 
     @Id
     @GeneratedValue(generator = "model_id_generator")
-    @SequenceGenerator(name = "model_id_generator", sequenceName = "model_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "model_id_generator", schema ="rent", sequenceName = "model_id_seq", allocationSize = 1)
     private Integer id;
 
     @Column(name = "name")

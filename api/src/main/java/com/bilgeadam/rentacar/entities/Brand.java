@@ -18,7 +18,7 @@ import java.util.List;
 public class Brand {
     @Id
     @GeneratedValue(generator = "brand_id_generator")
-    @SequenceGenerator(name = "brand_id_generator", sequenceName = "brand_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "brand_id_generator", schema ="rent", sequenceName = "brand_id_seq", allocationSize = 1)
     private Integer id;
 
     @Column(name = "name")

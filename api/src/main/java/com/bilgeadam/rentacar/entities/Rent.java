@@ -23,7 +23,7 @@ public class Rent {
 
     @Id
     @GeneratedValue(generator = "rent_id_generator")
-    @SequenceGenerator(name = "rent_id_generator", sequenceName = "rent_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "rent_id_generator", schema ="rent", sequenceName = "rent_id_seq", allocationSize = 1)
     private Integer id;
 
     @Column(name = "price", scale = 10, precision = 2)
