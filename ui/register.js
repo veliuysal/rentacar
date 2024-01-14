@@ -17,7 +17,7 @@ function register() {
     console.log('form datası çekilde: ', formData)
     //TODO: API'ye Post atmam lazım
 
-    fetch('http://localhost:8080/customer/addCustomer', {
+    fetch('http://localhost:8080/api/auth/signup', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

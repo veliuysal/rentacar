@@ -1,5 +1,6 @@
 package com.bilgeadam.rentacar.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,12 +31,12 @@ public class Personal implements UserDetails {
 
     private String surname;
     private String password;
-    private String country;
-    private String city;
-    private String address;
 
-    @Column(name = "postal_code")
-    private String postalCode;
+    @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JsonBackReference
+    private Address address;
+
 
     private String roles;
 

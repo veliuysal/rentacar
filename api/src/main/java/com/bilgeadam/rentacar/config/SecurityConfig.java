@@ -1,10 +1,10 @@
 package com.bilgeadam.rentacar.config;
 
 import com.bilgeadam.rentacar.filter.JwtAuthFilter;
+import com.bilgeadam.rentacar.repository.PersonalRepository;
 import com.bilgeadam.rentacar.services.auth.UserInfoUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -26,14 +26,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthFilter authFilter;
+    private final PersonalRepository personalRepository;
 
-    public SecurityConfig(JwtAuthFilter authFilter) {
+    public SecurityConfig(JwtAuthFilter authFilter, PersonalRepository personalRepository) {
         this.authFilter = authFilter;
+        this.personalRepository = personalRepository;
     }
 
     @Bean
     UserDetailsService userDetailsService() {
-        return new UserInfoUserDetailsService();
+        return new UserInfoUserDetailsService(personalRepository);
     }
 
     @Bean
