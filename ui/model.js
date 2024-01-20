@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('http://localhost:8080/api/model', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + token,
             },
             body: JSON.stringify({ name: name, brandId: brand }),
         })
@@ -35,7 +36,8 @@ function updateTable(brandID) {
     fetch(url, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + token,
         }
     })
         .then(response => response.json())
@@ -66,7 +68,8 @@ function openEditModal(id) {
     fetch('http://localhost:8080/api/model/' + id, {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + token,
         }
     })
         .then(response => response.json())
@@ -94,7 +97,8 @@ function editModel() {
     fetch('http://localhost:8080/api/model', {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + token,
         },
         body: JSON.stringify({ id: id, name: newName, brandId: newBrandId }),
     })
@@ -118,7 +122,8 @@ function deleteModel(id) {
         fetch('http://localhost:8080/api/model/' + id, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + token,
             },
         })
             .then(response => {
@@ -140,7 +145,8 @@ function fillBrands(selectBrands, selected) {
     fetch('http://localhost:8080/api/brand/all', {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + token,
         }
     })
         .then(response => response.json())

@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('http://localhost:8080/api/car', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + token,
             },
             body: JSON.stringify({ name: name }),
         })
@@ -33,7 +34,8 @@ function updateTable() {
     fetch('http://localhost:8080/api/brand/all', {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + token,
         }
     })
         .then(response => response.json())
