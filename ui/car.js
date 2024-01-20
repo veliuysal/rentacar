@@ -10,10 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Fetch API ile veriyi backend'e gönder
         fetch('http://localhost:8080/api/car', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "Bearer " + token,
-            },
+            headers: getDefaultHeaders(),
             body: JSON.stringify({ name: name }),
         })
             .then(response => response.json())
@@ -33,10 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function updateTable() {
     fetch('http://localhost:8080/api/brand/all', {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": "Bearer " + token,
-        }
+        headers: getDefaultHeaders(),
     })
         .then(response => response.json())
         .then(data => {

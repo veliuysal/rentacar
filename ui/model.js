@@ -11,10 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Fetch API ile veriyi backend'e gönder
         fetch('http://localhost:8080/api/model', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "Bearer " + token,
-            },
+            headers: getDefaultHeaders(),
             body: JSON.stringify({ name: name, brandId: brand }),
         })
             .then(response => response.json())
@@ -35,10 +32,7 @@ function updateTable(brandID) {
     var url = brandID != -1 ? 'http://localhost:8080/api/model/brand/' + brandID : 'http://localhost:8080/api/model/all';
     fetch(url, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": "Bearer " + token,
-        }
+        headers: getDefaultHeaders(),
     })
         .then(response => response.json())
         .then(data => {
@@ -67,10 +61,7 @@ function openEditModal(id) {
     // Modal'ı açmadan önce mevcut marka bilgilerini al
     fetch('http://localhost:8080/api/model/' + id, {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": "Bearer " + token,
-        }
+        headers: getDefaultHeaders(),
     })
         .then(response => response.json())
         .then(model => {
@@ -96,10 +87,7 @@ function editModel() {
     // Fetch API ile veriyi backend'e gönder
     fetch('http://localhost:8080/api/model', {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": "Bearer " + token,
-        },
+        headers: getDefaultHeaders(),
         body: JSON.stringify({ id: id, name: newName, brandId: newBrandId }),
     })
         .then(response => response.json())
@@ -121,10 +109,7 @@ function deleteModel(id) {
         // Fetch API ile veriyi backend'e gönder
         fetch('http://localhost:8080/api/model/' + id, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "Bearer " + token,
-            },
+            headers: getDefaultHeaders(),
         })
             .then(response => {
                 if (response.ok) {
@@ -144,10 +129,7 @@ function deleteModel(id) {
 function fillBrands(selectBrands, selected) {
     fetch('http://localhost:8080/api/brand/all', {
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            "Authorization": "Bearer " + token,
-        }
+        headers: getDefaultHeaders(),
     })
         .then(response => response.json())
         .then(data => {

@@ -10,10 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Fetch API ile veriyi backend'e gönder
     fetch("http://localhost:8080/api/brand", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-      },
+      headers: getDefaultHeaders(),
       body: JSON.stringify({ name: name }),
     })
       .then((response) => response.json())
@@ -31,56 +28,47 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function updateTable() {
-  var token = localStorage.getItem("jwtToken");
-  fetch("http://localhost:8080/api/brand/all", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      var tableBody = document
-        .getElementById("brandTable")
-        .getElementsByTagName("tbody")[0];
-      tableBody.innerHTML = "";
+  request_no_body(
+    "http://localhost:8080/api/brand/all",
+    "GET",
+    fillTableWithFetch
+  );
+}
 
-      data.forEach(function (brand) {
-        var row =
-          "<tr>" +
-          "<td>" +
-          brand.id +
-          "</td>" +
-          "<td>" +
-          brand.name +
-          "</td>" +
-          "<td>" +
-          "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#editModal' onclick='openEditModal(" +
-          brand.id +
-          ")'>Edit</button> | " +
-          "<button type='button' class='btn btn-danger' onclick='deleteBrand(" +
-          brand.id +
-          ")'>Delete</button>" +
-          "</td>" +
-          "</tr>";
+function fillTableWithFetch(data) {
+  var tableBody = document
+    .getElementById("brandTable")
+    .getElementsByTagName("tbody")[0];
+  tableBody.innerHTML = "";
 
-        tableBody.innerHTML += row;
-      });
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  data.forEach(function (brand) {
+    var row =
+      "<tr>" +
+      "<td>" +
+      brand.id +
+      "</td>" +
+      "<td>" +
+      brand.name +
+      "</td>" +
+      "<td>" +
+      "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#editModal' onclick='openEditModal(" +
+      brand.id +
+      ")'>Edit</button> | " +
+      "<button type='button' class='btn btn-danger' onclick='deleteBrand(" +
+      brand.id +
+      ")'>Delete</button>" +
+      "</td>" +
+      "</tr>";
+
+    tableBody.innerHTML += row;
+  });
 }
 
 function openEditModal(id) {
   // Modal'ı açmadan önce mevcut marka bilgilerini al
   fetch("http://localhost:8080/api/brand/" + id, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token,
-    },
+    headers: getDefaultHeaders(),
   })
     .then((response) => response.json())
     .then((brand) => {
@@ -104,10 +92,7 @@ function editBrand() {
   // Fetch API ile veriyi backend'e gönder
   fetch("http://localhost:8080/api/brand", {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token,
-    },
+    headers: getDefaultHeaders(),
     body: JSON.stringify({ id: id, name: newName }),
   })
     .then((response) => response.json())
@@ -129,10 +114,7 @@ function deleteBrand(id) {
     // Fetch API ile veriyi backend'e gönder
     fetch("http://localhost:8080/api/brand/" + id, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-      },
+      headers: getDefaultHeaders(),
     })
       .then((response) => {
         if (response.ok) {
