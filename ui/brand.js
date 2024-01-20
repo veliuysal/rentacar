@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+  var role = getRole();
+
+  if ("ROLE_USER" === role) {
+    window.location.href = "index.html";
+  }
   // Sayfa yüklendiğinde tüm markaları getir
   updateTable();
 

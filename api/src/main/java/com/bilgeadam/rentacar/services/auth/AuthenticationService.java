@@ -41,7 +41,7 @@ public class AuthenticationService {
         user.setAddress(address);
         personalRepository.save(user);
         var jwt = jwtService.generateToken(user);
-        return LoginDTO.builder().token(jwt).build();
+        return LoginDTO.builder().fullName(user.getFullName()).token(jwt).build();
     }
 
     public LoginDTO signin(SigninRequest request) {
@@ -50,6 +50,6 @@ public class AuthenticationService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getEmail(), request.getPassword()));
         var jwt = jwtService.generateToken(user);
-        return LoginDTO.builder().role(user.getRoles()).token(jwt).build();
+        return LoginDTO.builder().fullName(user.getFullName()).token(jwt).build();
     }
 }

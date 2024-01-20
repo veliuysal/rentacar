@@ -25,3 +25,17 @@ function request_no_body(_url, _method, callback) {
       redirectToLogin();
     });
 }
+
+function parseJwt(token) {
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace("-", "+").replace("_", "/");
+  const decodedData = JSON.parse(atob(base64));
+  const userRole = decodedData.authorities[0].authority;
+  return userRole;
+}
+
+function getRole() {
+  var token = localStorage.getItem("jwtToken");
+  var role = parseJwt(token);
+  return role;
+}

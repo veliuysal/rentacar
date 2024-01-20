@@ -37,8 +37,14 @@ public class Personal implements UserDetails {
     @JsonBackReference
     private Address address;
 
-
     private String roles;
+
+    @Transient
+    private String fullName;
+
+    public String getFullName() {
+        return this.firstName + " " + this.surname;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

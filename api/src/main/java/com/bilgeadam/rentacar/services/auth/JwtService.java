@@ -27,7 +27,9 @@ public class JwtService {
     public static final String SECRET = "404D635166546A576E5A7234753778214125442A472D4B6150645267556B5870";
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("authorities", userDetails.getAuthorities());
+        return generateToken(claims, userDetails);
     }
 
     public String extractUsername(String token) {
