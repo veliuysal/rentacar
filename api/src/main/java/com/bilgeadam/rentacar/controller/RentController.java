@@ -1,14 +1,16 @@
 package com.bilgeadam.rentacar.controller;
 
+import com.bilgeadam.rentacar.dto.model.ModelDTO;
 import com.bilgeadam.rentacar.dto.rent.RentDTO;
 import com.bilgeadam.rentacar.dto.rent.RentSaveDTO;
-import com.bilgeadam.rentacar.entities.Brand;
 import com.bilgeadam.rentacar.services.RentService;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/rent")
 public class RentController {
 
     //TODO: Verilen tarih aralığında kiralamaları getriren fonksiyon
@@ -33,6 +35,11 @@ public class RentController {
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public RentDTO saveRent(@RequestBody RentSaveDTO dto) {
         return rentService.saveRent(dto);
+    }
+
+    @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<RentDTO> getAllRents() {
+        return rentService.getAllRents();
     }
 
 }

@@ -4,6 +4,7 @@ import com.bilgeadam.rentacar.dto.common.EnumDTO;
 import com.bilgeadam.rentacar.dto.common.SelectDataDTO;
 import com.bilgeadam.rentacar.enums.CarBodyType;
 import com.bilgeadam.rentacar.enums.Color;
+import com.bilgeadam.rentacar.enums.FuelTank;
 import com.bilgeadam.rentacar.enums.FuelType;
 import org.springframework.stereotype.Service;
 
@@ -60,4 +61,14 @@ public class CommonServices {
         return dtos;
     }
 
+    public List<EnumDTO> getAllFuelTanks() {
+        List<EnumDTO> dtos = new ArrayList<>();
+        for (FuelTank fuelTank : FuelTank.values()) {
+            EnumDTO dto = new EnumDTO();
+            dto.setOrdinal(fuelTank.ordinal());
+            dto.setValue(fuelTank.name());
+            dtos.add(dto);
+        }
+        return dtos;
+    }
 }

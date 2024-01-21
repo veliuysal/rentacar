@@ -44,4 +44,9 @@ public class CommonController {
     public List<EnumDTO> getAllBodyTypes() {
         return commonServices.getAllBodyTypes();
     }
+
+    @GetMapping(path = "/fuel-tanks", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<EnumDTO> getAllFuelTanks() {
+        return commonServices.getAllColors();
+    }
 }
