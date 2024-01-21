@@ -36,6 +36,25 @@
 
     <div class="container" id="content">
         <!-- İçerik buraya gelecek -->
+        <form id="rentForm" class="mb-4">
+            <div class="form-group">
+                <label for="car">Choose a car:</label>
+                <select name="cars" id="cars" class="form-control" onchange="getSelectedModel()">
+                </select>
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="price" name="price" required>
+                <label for="startDate">Start Date:</label>
+                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                <label for="endDate">End Date:</label>
+                <input type="date" class="form-control" id="endDate" name="endDate" required>
+                <label for="kilometers">End Date:</label>
+                <input type="number" class="form-control" id="kilometers" name="kilometers" required>
+                <label for="fuelTanks">Fuel Tank:</label>
+                <select name="fuelTanks" id="fuelTanks" class="form-control" onchange="getSelectedFuelTanks()">
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" id="addRentBtn">Add Rent</button>
+        </form>
     </div>
     <!-- JavaScript dosyasını çağırın -->
     <script src="./auth.js"></script>

@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("addBrandBtn").addEventListener("click", function () {
     // Form verilerini al
     var name = document.getElementById("name").value;
-    var token = localStorage.getItem("jwtToken");
     // Fetch API ile veriyi backend'e gönder
     fetch("http://localhost:8080/api/brand", {
       method: "POST",
